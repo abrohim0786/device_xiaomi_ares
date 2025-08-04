@@ -90,7 +90,7 @@ Current state of features (from [here](https://twrp.me/faq/OfficialMaintainer.ht
 # Building
 ```bash
 source build/envsetup.sh
-lunch twrp_chopin-eng
+lunch twrp_ares-eng
 mka bootimage -j$(nproc --all)
 ```
 
