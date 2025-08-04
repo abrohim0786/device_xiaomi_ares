@@ -1,17 +1,19 @@
-# Copyright (C) 2025 The Team Win Recovery Project
-# Copyright (C) 2025 ツ๛abrohim๛ for POCO F3 GT (ares)
-# SPDX-License-Identifier: Apache-2.0
-#
-# This file is part of TWRP Device Tree.
-# It is used to map partitions for custom recovery environment.
+# =================================================================
+#  TWRP Recovery FSTAB for POCO F3 GT (ares) | Dynamic Partitions
+#  Maintainer: ツ๛abrohim๛
+#  Copyright © 2025 ツ๛abrohim๛ Devs. All rights reserved.
+# =================================================================
 
-/system         /system     ext4    rw      wait,slotselect,logical
-/vendor         /vendor     ext4    rw      wait,slotselect,logical
-/product        /product    ext4    rw      wait,slotselect,logical
-/system_ext     /system_ext ext4    rw      wait,slotselect,logical
+# Dynamic system partitions (read-only, slotselect, logical)
+system        /system        ext4    ro      wait,slotselect,logical
+vendor        /vendor        ext4    ro      wait,slotselect,logical
+product       /product       ext4    ro      wait,slotselect,logical
+system_ext    /system_ext    ext4    ro      wait,slotselect,logical
 
-/dev/block/by-name/userdata   /data   f2fs   noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt   wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,fsverity
+# Encrypted userdata with inlinecrypt support
+/dev/block/by-name/userdata         /data           f2fs     noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,fsverity
 
-/dev/block/by-name/misc       /misc   emmc   defaults
-/dev/block/by-name/metadata   /metadata   ext4   noatime,nosuid,nodev,discard   wait,check,formattable
-/dev/block/by-name/boot       /boot   emmc   defaults   nofail,slotselect
+# Other essential partitions
+/dev/block/by-name/misc             /misc           emmc     defaults defaults
+/dev/block/by-name/metadata         /metadata       ext4     noatime,nosuid,nodev,discard wait,check,formattable
+/dev/block/by-name/boot             /boot           emmc     defaults first_stage_mount,nofail,slotselect
