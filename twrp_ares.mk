@@ -24,11 +24,6 @@ PRODUCT_BRAND := POCO
 PRODUCT_MODEL := ares
 PRODUCT_MANUFACTURER := xiaomi
 
-PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
-
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="vnd_ares-user 12 SP1A.210812.016 V816.0.2.0.TKJINXM release-keys"
-
 BUILD_FINGERPRINT := POCO/vnd_ares/ares:12/SP1A.210812.016/V816.0.2.0.TKJINXM:user/release-keys
 
 # HACK: Set vendor patch level
