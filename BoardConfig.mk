@@ -129,46 +129,5 @@ PLATFORM_VERSION := 20.1.0
 
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
-# TWRP specific build flags
-BOARD_CHARGER_DISABLE_INIT_BLANK := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file
-TW_NO_FASTBOOT_BOOT := true
-
 # TWRP
 TW_FRAMERATE := 120
-
-# TWRP Debug & Feature Flags for Vidratore
-
-# Logging & Repacking
-TWRP_INCLUDE_LOGCAT := true
-TARGET_USES_LOGD := true
-TW_INCLUDE_REPACKTOOLS := true
-TW_INCLUDE_RESETPROP := true
-
-# Display & Brightness
-TW_THEME := portrait_hdpi
-TW_SCREEN_BLANK_ON_BOOT := true
-TW_NO_SCREEN_BLANK := true
-TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
-TW_DEFAULT_BRIGHTNESS := 1200
-TW_MAX_BRIGHTNESS := 2047
-
-# Maintainer Info
-TW_DEVICE_VERSION := by ツ๛abrohim๛
-TW_OF_MAINTAINER := "ツ๛abrohim๛"
-
-# Language & File System Support
-TW_EXTRA_LANGUAGES := true
-TW_INCLUDE_NTFS_3G := true
-TARGET_USES_MKE2FS := true
-
-# Input & USB
-TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_EXCLUDE_APEX := true
-TW_EXCLUDE_DEFAULT_USB_INIT := true
-
-# UI Status Bar Customization
-TW_STATUS_ICONS_ALIGN := center
-TW_CUSTOM_CPU_POS := "210"
-TW_CUSTOM_CLOCK_POS := "40"
-TW_CUSTOM_BATTERY_POS := "790"
