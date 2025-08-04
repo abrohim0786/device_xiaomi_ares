@@ -33,16 +33,14 @@ AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS += \
     boot \
     dtbo \
-    lk \
-    preloader \
-    odm \
-    product \
     system \
     system_ext \
-    vbmeta_system \
-    vbemeta_vendor \
+    product \
     vendor \
-    vendor_boot
+    odm \
+    vbmeta \
+    vbmeta_system \
+    vbmeta_vendor
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
