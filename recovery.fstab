@@ -1,23 +1,33 @@
-# Android fstab file for TWRP - Xiaomi Ares
+# Xiaomi Ares (MT6893) - Recovery FSTAB
 
-# System partitions
-/dev/block/by-name/system           /system         ext4    ro      wait,logical,slotselect
-/dev/block/by-name/system_ext       /system_ext     ext4    ro      wait,logical,slotselect
-/dev/block/by-name/product          /product        ext4    ro      wait,logical,slotselect
-/dev/block/by-name/vendor           /vendor         ext4    ro      wait,logical,slotselect
-/dev/block/by-name/mi_ext           /mi_ext         ext4    ro      wait,logical,slotselect
+#--------------------------------------------------
+# Dynamic Partitions (dm-verified)
+#--------------------------------------------------
+/dev/block/dm-2              /system         ext4    ro,relatime,seclabel     wait,logical
+/dev/block/dm-4              /vendor         ext4    ro,relatime,seclabel     wait,logical
+/dev/block/dm-5              /product        ext4    ro,relatime,seclabel     wait,logical
+/dev/block/dm-3              /system_ext     ext4    ro,relatime,seclabel     wait,logical
 
-# Metadata partition
-/dev/block/by-name/metadata         /metadata       ext4    noatime,nosuid,nodev,discard    wait,check,formattable
+#--------------------------------------------------
+# Data & Encryption (F2FS)
+#--------------------------------------------------
+/dev/block/dm-37             /data           f2fs    rw,lazytime,nosuid,nodev,noatime,discard,inlinecrypt  wait,check,formattable
+/dev/block/sdc13             /metadata       ext4    rw,nosuid,nodev,noatime,discard                      wait,check
 
-# Userdata (data) partition
-/dev/block/by-name/userdata         /data           f2fs    noatime,nosuid,nodev,discard    wait,check,formattable
+#--------------------------------------------------
+# Boot Partitions (A/B Slot)
+#--------------------------------------------------
+/dev/block/sdc32             /boot           emmc    ro                      slotselect
+/dev/block/sdc34             /dtbo           emmc    ro                      slotselect
 
-# Misc partition
-/dev/block/by-name/misc             /misc           emmc    defaults                        defaults
+#--------------------------------------------------
+# Critical Partitions
+#--------------------------------------------------
+/dev/block/sdc14             /persist        ext4    rw,nosuid,nodev,noatime  wait
+/dev/block/sdc74             /cache          ext4    noatime,nosuid,nodev     wait,check
+/dev/block/sdc1              /misc           emmc    defaults                 defaults
 
-# Cache partition
-/dev/block/by-name/rescue           /cache          ext4    noatime,nosuid,nodev,discard    wait,check,formattable
-
-# Internal Storage (bind mount for TWRP)
-/data/media/0                       /storage        f2fs    bind                            bind
+#--------------------------------------------------
+# Encryption Support
+#--------------------------------------------------
+/metadata/vold/metadata_encryption  /keymaster  ext4    noatime,nosuid,nodev  wait
