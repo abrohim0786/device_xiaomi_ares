@@ -33,14 +33,16 @@ AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS += \
     boot \
     dtbo \
+    lk \
+    preloader \
+    odm \
+    product \
     system \
     system_ext \
-    product \
-    vendor \
-    odm \
-    vbmeta \
     vbmeta_system \
-    vbmeta_vendor
+    vbemeta_vendor \
+    vendor \
+    vendor_boot
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
@@ -80,8 +82,15 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
 # TWRP specific build flags
 TW_THEME := portrait_hdpi
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
+TW_LOAD_VENDOR_MODULES := "haptic.ko"
+TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
+TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
+TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone53/temp"
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file
+TW_BACKUP_EXCLUSIONS := /data/fonts
+TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_REPACKTOOLS := true
 TWRP_INCLUDE_LOGCAT := true
@@ -90,6 +99,7 @@ TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
 DEVICE_RESOLUTION := 1080x2400
+TW_EXCLUDE_APEX := true
 TW_MAX_BRIGHTNESS := 2047
 TW_DEFAULT_BRIGHTNESS := 1200
 TW_NO_HAPTICS := true
@@ -101,6 +111,7 @@ TW_STATUS_ICONS_ALIGN := center
 TW_CUSTOM_CPU_POS := "300"
 TW_CUSTOM_CLOCK_POS := "70"
 TW_CUSTOM_BATTERY_POS := "790"
+TW_BATTERY_SYSFS_WAIT_SECONDS := 6
 TARGET_USES_MKE2FS := true
 TW_NO_SCREEN_BLANK := true
 
