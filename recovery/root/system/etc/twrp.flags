@@ -1,29 +1,33 @@
-# TWRP flags file - Xiaomi Ares
+# TWRP Flags File - Xiaomi Ares (MT6893)
+# Updated to fix mount issues and boot loops
 
-# Boot partitions
-/boot           emmc    /dev/block/by-name/boot_a           flags=slotselect;display="boot";flashimg=1;backup=1
-/dtbo           emmc    /dev/block/by-name/dtbo_a           flags=slotselect;display="dtbo";flashimg=1;backup=1
-/bootloader     emmc    /dev/block/by-name/lk_a             flags=display="bootloader";backup=1
-/logo           emmc    /dev/block/by-name/logo             flags=display="logo";backup=1;flashimg=1
+# Boot Partitions (A/B Slots)
+/boot           emmc    /dev/block/by-name/boot_a           flags=slotselect;display="Boot";backup=1;flashimg=1
+/boot           emmc    /dev/block/by-name/boot_b           flags=slotselect;backup=1;flashimg=1
+/dtbo           emmc    /dev/block/by-name/dtbo_a           flags=slotselect;display="DTBO";backup=1;flashimg=1
+/dtbo           emmc    /dev/block/by-name/dtbo_b           flags=slotselect;backup=1;flashimg=1
 
-# Recovery/Misc
-/misc           emmc    /dev/block/by-name/misc             flags=display="misc";backup=1
+# Critical Partitions
+/data           f2fs    /dev/block/by-name/userdata         flags=display="Data";backup=1;fsflags="noatime,nosuid,nodev,discard";usermrf
+/metadata       ext4    /dev/block/by-name/metadata         flags=display="Metadata";backup=1
 
-# Metadata
-/metadata       ext4    /dev/block/by-name/metadata         flags=display="metadata";backup=1
+# Vendor/System Partitions
+/vendor         ext4    /dev/block/by-name/vendor           flags=display="Vendor";backup=1;logical
+/system         ext4    /dev/block/by-name/system           flags=display="System";backup=1;logical,slotselect
 
-# Cache
-/cache          ext4    /dev/block/by-name/rescue           flags=display="cache";backup=1
+# Misc Partitions
+/cache          ext4    /dev/block/by-name/rescue           flags=display="Cache";backup=1
+/persist        emmc    /dev/block/by-name/persist          flags=display="Persist";backup=1;flashimg=1
+/misc           emmc    /dev/block/by-name/misc             flags=display="Misc";backup=1
 
-# Data partition (critical for TWRP boot!)
-/data           f2fs    /dev/block/by-name/userdata         flags=display="data";backup=1;usermrf
+# Firmware Partitions (Do Not Modify)
+/bootloader     emmc    /dev/block/by-name/lk_a             flags=display="Bootloader";backup=1
+/logo           emmc    /dev/block/by-name/logo             flags=display="Logo";backup=1;flashimg=1
+/nvram          emmc    /dev/block/by-name/nvram            flags=display="NVRAM";backup=1;flashimg=1
 
-# Internal Storage (bind)
-/storage        f2fs    /data/media/0                       flags=display="Internal Storage";backup=1;usermrf;fsflags="bind";removable
+# Dynamic Partitions (Super)
+/product        ext4    /dev/block/by-name/product          flags=display="Product";backup=1;logical,slotselect
+/system_ext     ext4    /dev/block/by-name/system_ext       flags=display="System Ext";backup=1;logical,slotselect
 
-# Add other partitions as needed
-/nvram          emmc    /dev/block/by-name/nvram            flags=display="nvram";backup=1;flashimg=1
-/proinfo        emmc    /dev/block/by-name/proinfo          flags=display="proinfo";backup=1;flashimg=1
-/persist        emmc    /dev/block/by-name/persist          flags=display="persist";backup=1;flashimg=1
-
-# Add remaining partitions as required for your device
+# Encryption Flags (FBE/FDE)
+/keymaster      emmc    /dev/block/by-name/keymaster        flags=display="Keymaster";backup=1
