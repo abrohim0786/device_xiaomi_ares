@@ -1,4 +1,4 @@
-name: TWRP Recovery Builder 2025
+name: TWRP Recovery Builder ares 2025
 
 on:
   workflow_dispatch:
@@ -244,7 +244,7 @@ jobs:
           
     - name: Checking For Missing Dependencies
       run: |
-        cd tools
+        cd .github/tools
         mv -n libneeds ${GITHUB_WORKSPACE}/workspace/out/target/product/${{ github.event.inputs.DEVICE_NAME }}/recovery/root/
         mv -n ldcheck ${GITHUB_WORKSPACE}/workspace/out/target/product/${{ github.event.inputs.DEVICE_NAME }}/recovery/root/
         cd ../workspace/out/target/product/${{ github.event.inputs.DEVICE_NAME }}/recovery/root
