@@ -3,6 +3,12 @@
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=25&pause=1000&color=00F0FF&vCenter=true&center=true&width=850&lines=ツ๛abrohim๛+-+TWRP+Tree+for+Redmi+K40+Gaming;POCO+F3+GT+%7C+Codename:+ares+%2F+aresin;MediaTek+Dimensity+1200+%7C+Virtual+A%2FB+Partitions;Fully+Open+Source+Project+🔥;Maintained+by:+ツ๛abrohim๛+%F0%9F%91%BE" />
 </p>
 
+<h1 align="center">
+  <a href="https://twrp.me" target="_blank">
+    <img src="https://twrp.me/images/twrp-logo.png" alt="TWRP" width="300">
+  </a>
+</h1>
+
 ![OFRP](https://i.ibb.co/4WgF7pR/banner-2.png "OFRP")
 
 <h1 align="center">⚡ツ๛abrohim๛ Presents - TWRP Device Tree⚡</h1>
