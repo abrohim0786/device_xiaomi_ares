@@ -1,27 +1,27 @@
 # Android fstab file for POCO F3 GT / Redmi K40 Gaming (ares)
 # Format: <src> <mnt_point> <type> <mnt_flags and options> <fs_mgr_flags>
-# Dynamic System Partitions (slotselect + logical + ext4/erofs)
 
-system              /system             ext4   ro                                wait,logical,slotselect,first_stage_mount,avb
-system              /system             erofs  ro                                wait,logical,slotselect,first_stage_mount,avb
+# System partitions (erofs/ext4)
+/system             /system             erofs  ro,barrier=1                    wait,slotselect,avb=vbmeta_system,logical
+/system             /system             ext4   ro,barrier=1                    wait,slotselect,avb=vbmeta_system,logical
 
-system_ext          /system_ext         ext4   ro                                wait,logical,slotselect,first_stage_mount,avb
-system_ext          /system_ext         erofs  ro                                wait,logical,slotselect,first_stage_mount,avb
+/system_ext         /system_ext         erofs  ro,barrier=1                    wait,slotselect,avb=vbmeta_system,logical
+/system_ext         /system_ext         ext4   ro,barrier=1                    wait,slotselect,avb=vbmeta_system,logical
 
-product             /product            ext4   ro                                wait,logical,slotselect,first_stage_mount,avb
-product             /product            erofs  ro                                wait,logical,slotselect,first_stage_mount,avb
+/product            /product            erofs  ro,barrier=1                    wait,slotselect,avb=vbmeta_system,logical
+/product            /product            ext4   ro,barrier=1                    wait,slotselect,avb=vbmeta_system,logical
 
-vendor              /vendor             ext4   ro                                wait,logical,slotselect,first_stage_mount,avb
-vendor              /vendor             erofs  ro                                wait,logical,slotselect,first_stage_mount,avb
+/vendor             /vendor             erofs  ro,barrier=1                    wait,slotselect,avb=vbmeta_vendor,logical
+/vendor             /vendor             ext4   ro,barrier=1                    wait,slotselect,avb=vbmeta_vendor,logical
 
-mi_ext              /mi_ext             ext4   ro                                wait,logical,slotselect,first_stage_mount,avb
-mi_ext              /mi_ext             erofs  ro                                wait,logical,slotselect,first_stage_mount,avb
+/mi_ext            /mi_ext             erofs  ro,barrier=1                    wait,slotselect,logical
+/mi_ext            /mi_ext             ext4   ro,barrier=1                    wait,slotselect,logical
 
 # Metadata
 /dev/block/by-name/metadata             /metadata           ext4   noatime,nosuid,nodev,discard                wait,formattable
 
-# Data
-/dev/block/by-name/userdata             /data               f2fs   noatime,nosuid,nodev,discard                wait,formattable,fileencryption=ice,keydirectory=/metadata/vold/metadata_encryption
+# Data (F2FS with encryption)
+/dev/block/by-name/userdata             /data               f2fs   noatime,nosuid,nodev,discard,fsync_mode=nobarrier    wait,formattable,check,fileencryption=ice,keydirectory=/metadata/vold/metadata_encryption,reservedsize=128m
 
 # Misc
 /dev/block/by-name/misc                 /misc               emmc   defaults                                    defaults
