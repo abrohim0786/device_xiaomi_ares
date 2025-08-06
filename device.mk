@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2021 The TWRP Open Source Project
+# Copyright (C) 2025 The TWRP Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,20 +29,17 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
 # A/B
 AB_OTA_UPDATER := true
-
 AB_OTA_PARTITIONS += \
     boot \
     dtbo \
-    lk \
-    preloader \
-    odm \
-    product \
     system \
     system_ext \
-    vbmeta_system \
-    vbemeta_vendor \
+    product \
     vendor \
-    vendor_boot
+    odm \
+    vbmeta \
+    vbmeta_system \
+    vbmeta_vendor
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
