@@ -26,8 +26,8 @@
 /nvram          emmc    /dev/block/by-name/nvram            flags=display="NVRAM";backup=1;flashimg=1
 
 # Dynamic Partitions (Super)
-/product        ext4    /dev/block/by-name/product          flags=display="Product";backup=1;logical,slotselect
-/system_ext     ext4    /dev/block/by-name/system_ext       flags=display="System Ext";backup=1;logical,slotselect
+/product        ext4    /dev/block/by-name/product          flags=display="Product";backup=1;logical
+/system_ext     ext4    /dev/block/by-name/system_ext       flags=display="System Ext";backup=1;logical
 
 # Encryption Flags (FBE/FDE)
-/keymaster      emmc    /dev/block/by-name/keymaster        flags=display="Keymaster";backup=1
+/keymaster      emmc    /dev/block/by-name/keymaster        flags=display="Keymaster";backup=1;flashimg=1
