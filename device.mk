@@ -29,17 +29,20 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
 # A/B
 AB_OTA_UPDATER := true
+
 AB_OTA_PARTITIONS += \
     boot \
     dtbo \
+    lk \
+    preloader \
+    odm \
+    product \
     system \
     system_ext \
-    product \
-    vendor \
-    odm \
-    vbmeta \
     vbmeta_system \
-    vbmeta_vendor
+    vbemeta_vendor \
+    vendor \
+    vendor_boot
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
@@ -83,7 +86,7 @@ TW_LOAD_VENDOR_MODULES := "haptic.ko"
 TW_SUPPORT_INPUT_AIDL_HAPTICS := true
 TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
 TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
-TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file
 TW_BACKUP_EXCLUSIONS := /data/fonts
 TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
@@ -110,6 +113,7 @@ TW_CUSTOM_BATTERY_POS := "790"
 TW_BATTERY_SYSFS_WAIT_SECONDS := 6
 TARGET_USES_MKE2FS := true
 TW_NO_SCREEN_BLANK := true
+
 # Maintainer and Branding
 TW_DEVICE_VERSION := ツ๛abrohim๛
 TW_OF_MAINTAINER := "ツ๛abrohim๛"
