@@ -181,7 +181,3 @@
 #elliptic sensor
 /dev/elliptic0            0644   system     system
 /dev/elliptic1            0644   system     system
-
-#In ueventd
-/dev/input/*              0666   root       input
-/dev/graphics/fb0         0666   root       graphics
