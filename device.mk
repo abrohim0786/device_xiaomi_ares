@@ -30,8 +30,12 @@ AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS += \
     boot \
     dtbo \
-    lk \
-    vendor_boot \
+    system \
+    system_ext \
+    product \
+    vendor \
+    odm \
+    vbmeta \
     vbmeta_system \
     vbmeta_vendor
 
@@ -107,5 +111,5 @@ TARGET_USES_MKE2FS := true
 TW_NO_SCREEN_BLANK := true
 
 # Maintainer and Branding
-TW_DEVICE_VERSION := by AbRoHim
+TW_DEVICE_VERSION := AbRoHim
 TW_OF_MAINTAINER := "AbRoHim"
