@@ -1,4 +1,10 @@
-ro.crypto.volume.filenames_mode=aes-256-cts
+# USB MTP
 ro.sys.usb.storage.type=mtp
+
+# TEE
 ro.vendor.mtk_tee_gp_support=1
+ro.vendor.mtk_mitee_support=1
 ro.vendor.mtk_microtrust_tee_support=1
+
+# Misc
+ro.vendor.mediatek.platform=MT6893
