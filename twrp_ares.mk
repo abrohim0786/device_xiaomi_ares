@@ -7,7 +7,7 @@
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Installs gsi keys into ramdisk, to boot a developer GSI with verified boot.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
@@ -21,7 +21,7 @@ $(call inherit-product, device/xiaomi/ares/device.mk)
 PRODUCT_DEVICE := ares
 PRODUCT_NAME := twrp_ares
 PRODUCT_BRAND := POCO
-PRODUCT_MODEL := ares
+PRODUCT_MODEL := Poco F3 GT,Redmi K40 Gaming
 PRODUCT_MANUFACTURER := xiaomi
 
 BUILD_FINGERPRINT := POCO/vnd_ares/ares:12/SP1A.210812.016/V816.0.2.0.TKJINXM:user/release-keys
