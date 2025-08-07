@@ -17,7 +17,7 @@
 LOCAL_PATH := device/xiaomi/ares
 
 # API
-PRODUCT_SHIPPING_API_LEVEL := 31
+PRODUCT_SHIPPING_API_LEVEL := 33
 
 # Dynamic
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
@@ -25,25 +25,15 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # Enable project quotas and casefolding for emulated storage without sdcardfs
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
-# A/B
-ENABLE_VIRTUAL_AB := false
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
-
-# A/B
+# Corrected A/B OTA partitions list
 AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS += \
     boot \
     dtbo \
     lk \
-    preloader \
-    odm \
-    product \
-    system \
-    system_ext \
+    vendor_boot \
     vbmeta_system \
-    vbemeta_vendor \
-    vendor \
-    vendor_boot
+    vbmeta_vendor
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
@@ -81,6 +71,7 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
  
 # TWRP specific build flags
+TW_SCREEN_BLANK_ON_BOOT:= true
 TW_THEME := portrait_hdpi
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 TW_LOAD_VENDOR_MODULES := "haptic.ko"
@@ -116,5 +107,5 @@ TARGET_USES_MKE2FS := true
 TW_NO_SCREEN_BLANK := true
 
 # Maintainer and Branding
-TW_DEVICE_VERSION := ツ๛abrohim๛
-TW_OF_MAINTAINER := "ツ๛abrohim๛"
+TW_DEVICE_VERSION := AbRoHim
+TW_OF_MAINTAINER := "AbRoHim"
