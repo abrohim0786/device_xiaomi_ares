@@ -1,14 +1,15 @@
-# ------- Logical System Partitions --------
+# Dynamic partitions (A/B)
 system      /system      erofs      ro      wait,slotselect,logical
 system_ext  /system_ext  erofs      ro      wait,slotselect,logical
 vendor      /vendor      erofs      ro      wait,slotselect,logical
 product     /product     erofs      ro      wait,slotselect,logical
 
-# --------- Userdata ----------
+# Userdata (with FBE v2+)
+# -- Cleaned: removed latemount,reservedsize,checkpoint=fs,fsverity,sysfs_path
 /dev/block/by-name/userdata    /data    f2fs  noatime,nosuid,nodev,gc_merge,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,resize,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption
 
-# --------- Metadata ----------
+# Metadata
 /dev/block/by-name/metadata    /metadata  f2fs  noatime,nosuid,nodev,discard wait,check,formattable
 
-# --------- Misc (Bootloader Utility Entry) ----
+# Misc
 /dev/block/by-name/misc /misc emmc defaults defaults
