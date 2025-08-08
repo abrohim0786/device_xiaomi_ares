@@ -1,15 +1,26 @@
-# Dynamic partitions (A/B)
-system      /system      ext4      ro      wait,slotselect,logical
-system_ext  /system_ext  ext4      ro      wait,slotselect,logical
-vendor      /vendor      ext4      ro      wait,slotselect,logical
-product     /product     ext4      ro      wait,slotselect,logical
+# Android fstab file.
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
-# Userdata (with FBE v2+)
-# -- Cleaned: removed latemount,reservedsize,checkpoint=fs,fsverity,sysfs_path
-/dev/block/by-name/userdata    /data    f2fs  noatime,nosuid,nodev,gc_merge,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,resize,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption
+#<dev>              <mnt_point>     <type>      <mnt_flags options>   
 
-# Metadata
-/dev/block/by-name/metadata    /metadata  f2fs  noatime,nosuid,nodev,discard wait,check,formattable
+# Logical Partitions (erofs)
+system          /system         erofs       ro      wait,slotselect,logical flags=logical
+system_ext      /system_ext     erofs       ro      wait,slotselect,logical flags=logical
+vendor          /vendor         erofs       ro      wait,slotselect,logical flags=logical
+product         /product        erofs       ro      wait,slotselect,logical flags=logical
 
-# Misc
+# Logical Partitions (ext4)
+system          /system         ext4       ro      wait,slotselect,logical flags=logical
+system_ext      /system_ext     ext4       ro      wait,slotselect,logical flags=logical
+vendor          /vendor         ext4       ro      wait,slotselect,logical flags=logical
+product         /product        ext4       ro      wait,slotselect,logical flags=logical
+
+# Userdata (Simplified for TWRP compatibility)
+/dev/block/by-name/userdata         /data       f2fs        noatime,nosuid,nodev wait,check,formattable
+/dev/block/by-name/metadata         /metadata   f2fs        noatime,nosuid,nodev,discard wait,check,formattable
+
+# Need to have this entry in here even though the mount point itself is no longer needed.
+# The update_engine code looks for this entry in order to determine the boot device address
+# and fails if it does not find it.
 /dev/block/by-name/misc /misc emmc defaults defaults
