@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2021 The TWRP Open Source Project
+# Copyright (C) 2025 The TWRP Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # A/B
 ENABLE_VIRTUAL_AB := true
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
 # Corrected A/B OTA partitions list
@@ -96,6 +95,7 @@ TW_INCLUDE_NTFS_3G := true
 TW_MAX_BRIGHTNESS := 2047
 TW_DEFAULT_BRIGHTNESS := 1200
 TW_NO_HAPTICS := true
+TW_EXCLUDE_APEX := true
 USE_RECOVERY_INSTALLER := true
 RECOVERY_INSTALLER_PATH := $(DEVICE_PATH)/installer
 
