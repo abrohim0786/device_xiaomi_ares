@@ -27,3 +27,6 @@
 
 # USB OTG
 /usb-otg       auto    /dev/block/sdd1             defaults                                                    voldmanaged=usb:auto
+
+# Fallback for super devices
+super          emmc    /dev/block/by-name/super     defaults                                                    recoveryonly
