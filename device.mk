@@ -22,62 +22,48 @@ PRODUCT_SHIPPING_API_LEVEL := 31
 # Dynamic
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
-# A/B
-ENABLE_VIRTUAL_AB := true
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+# Disable A/B until stable
+ENABLE_VIRTUAL_AB := false
+AB_OTA_UPDATER := false
 
-# Corrected A/B OTA partitions list
-AB_OTA_UPDATER := true
+# Remove conflicting OTA packages
+#PRODUCT_PACKAGES += \
+#    otapreopt_script \
+#    update_engine \
+#    update_engine_sideload \
+#    update_verifier
 
-AB_OTA_PARTITIONS += \
-    boot \
-    dtbo \
-    system \
-    system_ext \
-    product \
-    vendor \
-    odm \
-    vbmeta \
-    vbmeta_system \
-    vbmeta_vendor
-
-PRODUCT_PACKAGES += \
-    otapreopt_script \
-    update_engine \
-    update_engine_sideload \
-    update_verifier
-
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_system=true \
-    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
-    FILESYSTEM_TYPE_system=ext4 \
-    POSTINSTALL_OPTIONAL_system=true
-
-# Boot control HAL
+# Boot control HAL (essential for recovery)
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-impl.recovery \
-    android.hardware.boot@1.2-impl
+    android.hardware.boot@1.2-impl \
+    bootctrl.$(TARGET_BOARD_PLATFORM).recovery
 
-# fastbootd
+# Fastbootd
 PRODUCT_PACKAGES += \
+    fastbootd \
     android.hardware.fastboot@1.0-impl-mock
 
-# Heath hal
+# Health HAL
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-service \
-    android.hardware.health@2.1-impl
+    android.hardware.health@2.1-impl.recovery
     
-# Additional target Libraries
-TARGET_RECOVERY_DEVICE_MODULES += \
-    libkeymaster4 \
-    libpuresoftkeymasterdevice
+# Critical libraries for recovery
+PRODUCT_PACKAGES += \
+    libion \
+    libxml2 \
+    libbase \
+    libz
 
-TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster4.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
- 
+# Keymaster libraries (required even without crypto)
+PRODUCT_PACKAGES += \
+    libkeymaster4 \
+    libpuresoftkeymasterdevice \
+    libkeymaster4support
+
 # TWRP specific build flags
-TW_SCREEN_BLANK_ON_BOOT:= true
+TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 TW_EXCLUDE_TWRPAPP := true
@@ -95,7 +81,7 @@ TW_INCLUDE_NTFS_3G := true
 TW_MAX_BRIGHTNESS := 2047
 TW_DEFAULT_BRIGHTNESS := 1200
 TW_NO_HAPTICS := true
-TW_EXCLUDE_APEX := true
+TW_EXCLUDE_APEX := false  # Must be false for Android 12+
 USE_RECOVERY_INSTALLER := true
 RECOVERY_INSTALLER_PATH := $(DEVICE_PATH)/installer
 
@@ -108,6 +94,32 @@ TW_CUSTOM_BATTERY_POS := "790"
 TW_BATTERY_SYSFS_WAIT_SECONDS := 6
 TARGET_USES_MKE2FS := true
 
+# Crypto (DISABLED to fix boot loop)
+TW_INCLUDE_CRYPTO := false
+TW_INCLUDE_CRYPTO_FBE := false
+TW_INCLUDE_FBE_METADATA_DECRYPT := false
+
 # Maintainer and Branding
 TW_DEVICE_VERSION := by AbRoHim
 TW_OF_MAINTAINER := "AbRoHim"
+
+# SELinux policies
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
+
+# Vendor security patch
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.security_patch=$(VENDOR_SECURITY_PATCH)
+
+# Soong namespace (essential for Android 12+)
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH) \
+    hardware/google/interfaces \
+    hardware/google/pixel
+
+# Override recovery modules
+PRODUCT_HOST_PACKAGES += \
+    pigz
+
+# Recovery modules
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/recovery/root/init.recovery.$(TARGET_BOARD_PLATFORM).rc:root/init.recovery.$(TARGET_BOARD_PLATFORM).rc
