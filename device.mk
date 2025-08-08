@@ -27,6 +27,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 # Corrected A/B OTA partitions list
 AB_OTA_UPDATER := true
+
 AB_OTA_PARTITIONS += \
     boot \
     dtbo \
@@ -76,16 +77,13 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
  
 # TWRP specific build flags
 TW_SCREEN_BLANK_ON_BOOT:= true
+TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_USE_TOOLBOX := true
+TW_EXCLUDE_TWRPAPP := true
 TW_THEME := portrait_hdpi
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
-TW_LOAD_VENDOR_MODULES := "haptic.ko"
-TW_SUPPORT_INPUT_AIDL_HAPTICS := true
-TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
-TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file
-TW_BACKUP_EXCLUSIONS := /data/fonts
-TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_REPACKTOOLS := true
 TWRP_INCLUDE_LOGCAT := true
@@ -93,8 +91,6 @@ TARGET_USES_LOGD := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
-DEVICE_RESOLUTION := 1080x2400
-TW_EXCLUDE_APEX := true
 TW_MAX_BRIGHTNESS := 2047
 TW_DEFAULT_BRIGHTNESS := 1200
 TW_NO_HAPTICS := true
@@ -103,13 +99,13 @@ RECOVERY_INSTALLER_PATH := $(DEVICE_PATH)/installer
 
 # StatusBar Customization
 TW_STATUS_ICONS_ALIGN := center
+DEVICE_RESOLUTION := 1080x2400
 TW_CUSTOM_CPU_POS := "300"
 TW_CUSTOM_CLOCK_POS := "70"
 TW_CUSTOM_BATTERY_POS := "790"
 TW_BATTERY_SYSFS_WAIT_SECONDS := 6
 TARGET_USES_MKE2FS := true
-TW_NO_SCREEN_BLANK := true
 
 # Maintainer and Branding
-TW_DEVICE_VERSION := AbRoHim
+TW_DEVICE_VERSION := by AbRoHim
 TW_OF_MAINTAINER := "AbRoHim"

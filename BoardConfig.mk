@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2025 The TWRP Open Source Project
+# Copyright (C) 2021 The TWRP Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,11 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright (C) 2025 The Android Open Source Project
-# Copyright (C) 2025 SebaUbuntu's TWRP device tree generator
-#
-# SPDX-License-Identifier: Apache-2.0
-#
+
+# For building with minimal manifest
+ALLOW_MISSING_DEPENDENCIES := true
 
 DEVICE_PATH := device/xiaomi/ares
 
@@ -35,12 +33,12 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a55
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := mt6893
+TARGET_BOOTLOADER_BOARD_NAME := $(PRODUCT_DEVICE)
 TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 
 # Platform
-TARGET_BOARD_PLATFORM := mt6893
+TARGET_BOARD_PLATFORM := $(PRODUCT_PLATFORM)
 
 # Kernel
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
@@ -55,12 +53,6 @@ BOARD_BOOTIMG_HEADER_VERSION := 2
 
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
-
-# Properties
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
-
-# fstab
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
 
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
@@ -78,11 +70,10 @@ BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 3
 
 # ASSERT
-TARGET_OTA_ASSERT_DEVICE := ares,aresin
+TARGET_OTA_ASSERT_DEVICE := $(PRODUCT_DEVICE)
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
-BOARD_HAS_MTK_HARDWARE := true
 BOARD_CACHEIMAGE_PARTITION_SIZE := 136314880
 BOARD_BOOTIMAGE_PARTITION_SIZE := 134217728
 
@@ -95,7 +86,7 @@ BOARD_MAIN_PARTITION_LIST := \
     system \
     vendor \
     system_ext \
-
+    
 TARGET_COPY_OUT_VENDOR := vendor
 
 # File system
@@ -108,23 +99,24 @@ TARGET_USERIMAGES_USE_EXT4 := true
 
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_HAS_NO_SELECT_BUTTON := true>
+BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_SUPPRESS_SECURE_ERASE := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_USES_RECOVERY_AS_BOOT := true
 TARGET_NO_RECOVERY := true
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # System as root
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 
-# Treble
-BOARD_VNDK_VERSION := current
+# Metadata
+BOARD_USES_METADATA_PARTITION := true
 
 # Encryption
-TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_CRYPTO := true
 BOARD_USES_METADATA_PARTITION := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
-TW_INCLUDE_FUSE_EXFAT := true
 
 # Version/Patch
 PLATFORM_VERSION := 99.87.36
@@ -132,9 +124,3 @@ PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
-
-# TWRP
-TW_FRAMERATE := 120
-
-TW_INCLUDE_LOGCAT := true
-TARGET_USES_LOGD := true
