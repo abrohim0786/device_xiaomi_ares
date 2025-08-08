@@ -7,3 +7,21 @@ ro.vendor.mtk_microtrust_tee_support=1
 # Basic properties
 ro.twrp.build=1
 ro.hardware.keystore=$(TARGET_BOARD_PLATFORM)
+
+# Project Treble (Required)
+ro.treble.enabled=true
+ro.vndk.version=33  # Android 13 VNDK version
+
+# Security Bypass (Essential for custom recovery)
+ro.build.version.security_patch=2099-12-31
+ro.vendor.build.security_patch=2099-12-31
+ro.bootimage.build.date.utc=0
+
+# Device Identification (Prevents mount errors)
+ro.product.vendor.device=ares
+ro.product.system.device=ares
+
+# TWRP-Specific (Debugging/Functionality)
+persist.sys.usb.config=adb
+persist.service.adb.enable=1
+debug.sf.latch_unsignaled=1
