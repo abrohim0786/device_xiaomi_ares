@@ -10,7 +10,6 @@ ro.hardware.keystore=$(TARGET_BOARD_PLATFORM)
 
 # Project Treble (Required)
 ro.treble.enabled=true
-ro.vndk.version=33  # Android 13 VNDK version
 
 # Security Bypass (Essential for custom recovery)
 ro.build.version.security_patch=2099-12-31
