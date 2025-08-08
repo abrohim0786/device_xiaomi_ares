@@ -55,8 +55,6 @@ BOARD_BOOTIMG_HEADER_VERSION := 4
 
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
-BOARD_INCLUDE_RECOVERY_DTBO := true
-TARGET_RECOVERY_DTBO := device/xiaomi/ares/prebuilt/dtbo.img
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
