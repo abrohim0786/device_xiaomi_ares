@@ -18,13 +18,3 @@ soong_namespace {
         "packages/modules/Virtualization",
     ],
 }
-
-twrp_recovery {
-    name: "twrp_ares",
-    include_defaults: false,
-    board: "ares",
-    extra_files: [
-        "recovery/root/init.recovery.mt6893.rc",
-        "sepolicy/file_contexts",
-    ],
-}
