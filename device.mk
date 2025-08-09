@@ -119,7 +119,3 @@ PRODUCT_SOONG_NAMESPACES += \
 # Override recovery modules
 PRODUCT_HOST_PACKAGES += \
     pigz
-
-# Recovery modules
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/root/init.recovery.$(TARGET_BOARD_PLATFORM).rc:root/init.recovery.$(TARGET_BOARD_PLATFORM).rc
