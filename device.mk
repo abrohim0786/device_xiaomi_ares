@@ -106,4 +106,4 @@ PRODUCT_HOST_PACKAGES += \
     mkfs.f2fs
 
 # Maintainer Info
-TW_DEVICE_VERSION := Fixed-by-AbRoHim
+TW_DEVICE_VERSION := by-ツ๛abrohim๛
