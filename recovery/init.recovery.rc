@@ -1,6 +1,0 @@
-on early-init
-    start ueventd
-
-on init
-    symlink /dev/block/by-name/system /system
-    symlink /dev/block/by-name/vendor /vendor
