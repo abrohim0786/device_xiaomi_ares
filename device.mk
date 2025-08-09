@@ -95,13 +95,13 @@ TW_BATTERY_SYSFS_WAIT_SECONDS := 6
 TARGET_USES_MKE2FS := true
 
 # Crypto (DISABLED to fix boot loop)
-TW_INCLUDE_CRYPTO := false
-TW_INCLUDE_CRYPTO_FBE := false
-TW_INCLUDE_FBE_METADATA_DECRYPT := false
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
 
 # Maintainer and Branding
-TW_DEVICE_VERSION := by AbRoHim
-TW_OF_MAINTAINER := "AbRoHim"
+TW_DEVICE_VERSION := by ツ๛abrohim๛
+TW_OF_MAINTAINER := "ツ๛abrohim๛"
 
 # SELinux policies
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
