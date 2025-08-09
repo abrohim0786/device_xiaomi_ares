@@ -110,12 +110,6 @@ BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.security_patch=$(VENDOR_SECURITY_PATCH)
 
-# Soong namespace (essential for Android 12+)
-PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH) \
-    hardware/google/interfaces \
-    hardware/google/pixel
-
 # Override recovery modules
 PRODUCT_HOST_PACKAGES += \
     pigz
