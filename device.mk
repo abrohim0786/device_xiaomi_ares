@@ -106,10 +106,6 @@ TW_OF_MAINTAINER := "AbRoHim"
 # SELinux policies
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
-# Vendor security patch
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.security_patch=$(VENDOR_SECURITY_PATCH)
-
 # Override recovery modules
 PRODUCT_HOST_PACKAGES += \
     pigz
