@@ -99,6 +99,9 @@ TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 
+TW_CRYPTO_USE_SYSTEM_VOLD := true
+TW_CRYPTO_SYSTEM_VOLD_MOUNT := system vendor produc
+
 # Maintainer and Branding
 TW_DEVICE_VERSION := by ツ๛abrohim๛
 TW_OF_MAINTAINER := "ツ๛abrohim๛"
